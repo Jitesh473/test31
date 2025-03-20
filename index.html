@@ -1,2 +1,32 @@
-it is a duplicate web page
- i like it
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Coding Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Color Coding Game</h1>
+        <p>Match the target color by clicking one of the buttons below!</p>
+
+        <!-- Target Color Box -->
+        <div class="target-color" id="target-color"></div>
+
+        <!-- Buttons for Color Options -->
+        <div class="color-buttons">
+            <button class="color-btn" style="background-color: #FF5733;"></button>
+            <button class="color-btn" style="background-color: #33FF57;"></button>
+            <button class="color-btn" style="background-color: #3357FF;"></button>
+            <button class="color-btn" style="background-color: #FF33FF;"></button>
+            <button class="color-btn" style="background-color: #FFD700;"></button>
+        </div>
+
+        <p id="result-message"></p>
+        <button id="reset-button">Try Again</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
