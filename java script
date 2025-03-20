@@ -1,0 +1,37 @@
+// Function to generate a random color in hex format
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+// Set up the game
+let targetColor = getRandomColor();
+document.getElementById('target-color').style.backgroundColor = targetColor;
+
+const colorButtons = document.querySelectorAll('.color-btn');
+const resultMessage = document.getElementById('result-message');
+const resetButton = document.getElementById('reset-button');
+
+// Check if the selected color is correct
+colorButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        if (button.style.backgroundColor === targetColor) {
+            resultMessage.textContent = 'You win! Color matched!';
+            resultMessage.style.color = 'green';
+        } else {
+            resultMessage.textContent = 'Try again!';
+            resultMessage.style.color = 'red';
+        }
+    });
+});
+
+// Reset the game
+resetButton.addEventListener('click', () => {
+    targetColor = getRandomColor();
+    document.getElementById('target-color').style.backgroundColor = targetColor;
+    resultMessage.textContent = '';
+});
