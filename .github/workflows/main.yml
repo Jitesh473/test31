@@ -3,7 +3,7 @@ name: Deploy to AWS EC2
 on:
   push:
     branches:
-      - master  # Change this to your deployment branch
+      - master
 
 jobs:
   deploy:
@@ -23,9 +23,22 @@ jobs:
     - name: Deploy to EC2
       run: |
         ssh ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-          cd /var/www/html  # Change this to your app's directory
-          git pull origin master   # Pull the latest changes
-          nginx install            # Install dependencies (if using Node.js)
-          nginx restart all        # Restart application (if using PM2)
-          exit
+          # Ensure the project directory exists
+          mkdir -p /var/www/html
+          cd /var/www/html
+
+          # Initialize Git if not already done
+          if [ ! -d ".git" ]; then
+            git clone https://github.com/your-username/your-repo.git .
+          else
+            git pull origin master
+          fi
+
+          # Install Nginx if not installed
+          if ! command -v nginx &> /dev/null; then
+            sudo apt update && sudo apt install -y nginx
+          fi
+
+          # Restart Nginx to serve the latest code
+          sudo systemctl restart nginx
         EOF
