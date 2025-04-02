@@ -25,8 +25,9 @@ jobs:
         ssh -tt ubuntu@${{ secrets.EC2_HOST }} <<EOF
         set -e  # Exit on errors
 
-        # Ensure project directory exists
-        mkdir -p /var/www/html
+        # Ensure project directory exists with correct permissions
+        sudo mkdir -p /var/www/html
+        sudo chown -R ubuntu:ubuntu /var/www/html
         cd /var/www/html
 
         # Check if repo is already cloned
