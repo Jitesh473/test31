@@ -30,15 +30,4 @@ jobs:
           # Initialize Git if not already done
           if [ ! -d ".git" ]; then
             git clone https://github.com/your-username/your-repo.git .
-          else
-            git pull origin master
-          fi
-
-          # Install Nginx if not installed
-          if ! command -v nginx &> /dev/null; then
-            sudo apt update && sudo apt install -y nginx
-          fi
-
-          # Restart Nginx to serve the latest code
-          sudo systemctl restart nginx
-        EOF
+       
