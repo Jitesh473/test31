@@ -3,7 +3,7 @@ name: Deploy to AWS EC2
 on:
   push:
     branches:
-      - master
+      - main  # Change this to your deployment branch
 
 jobs:
   deploy:
@@ -23,11 +23,7 @@ jobs:
     - name: Deploy to EC2
       run: |
         ssh ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-          # Ensure the project directory exists
-          mkdir -p /var/www/html
-          cd /var/www/html
-
-          # Initialize Git if not already done
-          if [ ! -d ".git" ]; then
-            git clone https://github.com/your-username/your-repo.git .
-       
+          cd /var/www/html  # Change this to your app's directory
+          git pull origin main   # Pull the latest changes
+          
+        EOF
